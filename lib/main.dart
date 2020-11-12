@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jrup/models/User.dart';
+import 'package:jrup/screens/authenticate/register.dart';
 import 'package:jrup/screens/wrapper.dart';
 import 'package:jrup/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -21,17 +22,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //used for state management; this will constantly check for the stream value to know login present state
-    return StreamProvider<User>.value(
-      value: AuthService().user, //app will listen to this value via the streams provider
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.teal,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Wrapper(),
+        home: Container(),
         debugShowCheckedModeBanner: false,
-      ),
     );
   }
 }
