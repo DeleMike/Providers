@@ -1,0 +1,12 @@
+ RaisedButton(
+          child: Text('Sign in anonymously'),
+          onPressed: () async {
+            //sign in anonymously
+              dynamic result = await _authService.signInAnon();
+              if(result != null){
+                print('signed in');
+                print('Result ==> ${result.uid}');
+              }else{
+                print('Error sign in');
+              }
+          }

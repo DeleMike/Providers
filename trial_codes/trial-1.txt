@@ -1,0 +1,87 @@
+DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: Container(
+              color: Colors.teal,
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TabBar(
+                        tabs: [
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              ListView(
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        //logo
+                        Container(
+                          margin: EdgeInsets.only(
+                            bottom: 16.0,
+                            top: 16.0,
+                          ),
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.teal.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: logo,
+                        ),
+
+                        SizedBox(
+                          height: 25.0,
+                        ),
+
+                        //label of product
+                        Text('JRUP',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 25)),
+
+                        SizedBox(
+                          height: 25.0,
+                        ),
+
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(child: Text('Login Page')),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [Text('Sign up page')],
+              )
+            ],
+          ),

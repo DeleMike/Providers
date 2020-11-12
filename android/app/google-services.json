@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "441579752019",
+    "firebase_url": "https://jrup-4d9a1.firebaseio.com",
+    "project_id": "jrup-4d9a1",
+    "storage_bucket": "jrup-4d9a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441579752019:android:1b44eff25ce5b7c57754a6",
+        "android_client_info": {
+          "package_name": "com.mikeinvents.jrup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441579752019-93gbc61rfacfvvdovahtb508cj9v6mb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZGY9K-asPrQWBwoPWs0aymH7Id5yU6r4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441579752019-93gbc61rfacfvvdovahtb508cj9v6mb8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
