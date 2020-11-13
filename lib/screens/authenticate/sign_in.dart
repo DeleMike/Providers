@@ -8,13 +8,24 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  var text = '';
+  var text = 'show';
   bool isObscure = true;
+  var icon = Icons.visibility;
 
   @override
   Widget build(BuildContext context) {
     //print("ChangerVal initial value = ${_changerVal.heightVal}");
     // final val = Provider.of<Changer>(context);
+  
+  _toggleView() {
+    setState((){
+      isObscure = ! isObscure;
+      (text == 'show') ? text = 'hide' : text = 'show'; 
+      (icon == Icons.visibility) ? icon = Icons.visibility_off : icon = Icons.visibility;
+    });
+    
+  }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign in into app'),
@@ -42,9 +53,11 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 25.0),
                 Stack(
+                  alignment: Alignment(0, 0),
                   children: [
                     TextFormField(
                       keyboardType: TextInputType.visiblePassword,
+                      obscureText: _toggleView(),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(16.0),
                         hintText: 'Password',
@@ -60,9 +73,10 @@ class _SignInState extends State<SignIn> {
                     Positioned(
                       right: 5,
                       child: FlatButton.icon(
+                        splashColor: Colors.transparent,
                         onPressed: (){}, 
-                        icon: Icon(Icons.remove_red_eye), 
-                        label: Text('show'),
+                        icon: Icon(icon), 
+                        label: Text('$text'),
                       ),
                     ),
                   ],
@@ -82,6 +96,7 @@ class _SignInState extends State<SignIn> {
                     Container(
                       margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
                       child: FlatButton(
+                        splashColor: Colors.transparent,
                         child: Text(
                           'Don\'t have an account?',
                           style: TextStyle(
