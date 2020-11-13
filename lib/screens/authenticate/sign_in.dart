@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -7,61 +7,79 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   var text = 'show';
   bool isObscure = true;
-  var icon = Icons.visibility;
+  var icon = Icons.visibility_off;
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     //print("ChangerVal initial value = ${_changerVal.heightVal}");
     // final val = Provider.of<Changer>(context);
-  
-  _toggleView() {
-    setState((){
-      isObscure = ! isObscure;
-      (text == 'show') ? text = 'hide' : text = 'show'; 
-      (icon == Icons.visibility) ? icon = Icons.visibility_off : icon = Icons.visibility;
-    });
-    
-  }
+
+    _toggleView() {
+      setState(() {
+        isObscure = !isObscure;
+        (text == 'show') ? text = 'hide' : text = 'show';
+        (icon == Icons.visibility_off)
+            ? icon = Icons.visibility
+            : icon = Icons.visibility_off;
+      });
+    }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false, //removes the overflow error
+      backgroundColor: Colors.indigo[50],
       appBar: AppBar(
-        title: Text('Sign in into app'),
+        title: Text('Test Model'),
       ),
       body: Container(
-        child: Center(
-          child: Card(
-            margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 6.0),
-            child: Padding(
+        child: Column(
+          children: [
+            //brand image
+            Container(
+              margin: EdgeInsets.only(bottom: 10.0, top: 30.0),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Image.asset(
+                'assets/images/google_logo.png',
+                width: 70.0,
+              ),
+            ),
+
+            SizedBox(height: 25.0),
+
+            Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                SizedBox(height: 25.0),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(16.0),
-                    hintText: 'email',
-                    fillColor: Colors.indigo[100],
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.indigo[100], width: 2.0),
-                    ),
-                  ),
+              child: Text(
+                'Sign into your account',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 25.0),
-                Stack(
-                  alignment: Alignment(0, 0),
-                  children: [
+              ),
+            ),
+
+            //login card
+            Container(
+              margin: EdgeInsets.only(top: 16.0),
+              child: Card(
+                margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 6.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(children: [
+                    SizedBox(height: 25.0),
                     TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: _toggleView(),
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(16.0),
-                        hintText: 'Password',
-                        focusColor: Colors.black,
+                        hintText: 'Email',
                         fillColor: Colors.indigo[100],
                         filled: true,
                         enabledBorder: OutlineInputBorder(
@@ -70,66 +88,92 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      right: 5,
-                      child: FlatButton.icon(
-                        splashColor: Colors.transparent,
-                        onPressed: (){}, 
-                        icon: Icon(icon), 
-                        label: Text('$text'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RaisedButton(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.indigo,
-                      onPressed: () {},
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                      child: FlatButton(
-                        splashColor: Colors.transparent,
-                        child: Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.indigo,
+                    SizedBox(height: 25.0),
+                    Stack(
+                      alignment: Alignment(0, 0),
+                      children: [
+                        TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: isObscure,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(16.0),
+                            hintText: 'Password',
+                            focusColor: Colors.black,
+                            fillColor: Colors.indigo[100],
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.indigo[100], width: 2.0),
+                            ),
                           ),
                         ),
-                        onPressed: () {
-                          //sign up, if account is not created
-                        },
+                        Positioned(
+                          right: 1,
+                          child: FlatButton.icon(
+                            splashColor: Colors.transparent,
+                            onPressed: () {
+                              _toggleView();
+                            },
+                            icon: Icon(icon),
+                            label: Text('$text'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 25.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RaisedButton(
+                          child: Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.indigo,
+                          onPressed: () {},
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                          child: FlatButton(
+                            splashColor: Colors.transparent,
+                            child: Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.indigo,
+                              ),
+                            ),
+                            onPressed: () {
+                              //sign up, if account is not created
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: FlatButton(
+                          child: Text(
+                            'Forgot password',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.indigo,
+                            ),
+                          ),
+                          onPressed: () {
+                            //functionality for forgot password
+                          },
+                        ),
                       ),
                     ),
-                  ],
+                  ]),
                 ),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: FlatButton(
-                    child: Text(
-                      'Forgot password',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.indigo,
-                      ),
-                    ),
-                    onPressed: () {
-                      //functionality for forgot password
-                    },
-                  ),
-                ),
-              ]),
+                elevation: 2.0,
+              ),
             ),
-            elevation: 2.0,
-          ),
+          ],
         ),
       ),
     );
