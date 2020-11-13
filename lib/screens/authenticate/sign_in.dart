@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jrup/changer.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final val = Provider.of<Changer>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign in into app'),
