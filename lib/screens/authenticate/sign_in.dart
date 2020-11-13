@@ -50,7 +50,7 @@ class _SignInState extends State<SignIn> {
                     max: 900.0,
                     divisions: 8,
                     onChanged: (val) {
-                      _changerVal.heightVal = val;
+                      setState((){_changerVal.heightVal = val;});
                       print('_changerVal = ${_changerVal.heightVal}');
                     }
                         // setState(() => _currentStrength = val.round()),
