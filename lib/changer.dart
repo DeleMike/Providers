@@ -1,11 +1,11 @@
 class Changer {
-  int _heightVal = 0;
+  double _heightVal = 0;
 
-  int get heightVal {
+  double get heightVal {
     return _heightVal != null ? _heightVal : 0;
   } 
 
-  set heightVal(int val) {
+  set heightVal(double val) {
     _heightVal = val;
   }
 }

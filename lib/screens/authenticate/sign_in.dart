@@ -8,7 +8,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  final Changer changerVal = null;
+  Changer _changerVal;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,27 @@ class _SignInState extends State<SignIn> {
                       hintText: 'Password'
                     ),
                   ),
+
+                  Slider(
+                    value: (_changerVal.heightVal ?? 100),
+                    activeColor: Colors.indigo[_changerVal.heightVal ?? 100],
+                    inactiveColor: Colors.indigo[_changerVal.heightVal ?? 100],
+                    min: 100.0,
+                    max: 900.0,
+                    divisions: 8,
+                    onChanged: (val) {
+                      _changerVal.heightVal = val;
+                      print('_changerVal = ${_changerVal.heightVal}');
+                    }
+                        // setState(() => _currentStrength = val.round()),
+                  ),
                 ]
               ),
               
             ),
             elevation: 4.0,
           ),
+          
         ),
       ),
     );
