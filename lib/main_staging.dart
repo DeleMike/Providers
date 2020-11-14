@@ -7,7 +7,7 @@ void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   runApp(Provider<Flavor>.value(
-    value: Flavor.dev, //reads value from here
+    value: Flavor.staging, //reads value from here
     child: MyApp()
   ));
 }
