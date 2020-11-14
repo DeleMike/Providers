@@ -1,6 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jrup/screens/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +15,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Wrapper(),
+      home: Scaffold(
+        child: Container(
+          child: Center(
+            child: Text('Hello');
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
