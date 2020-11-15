@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +29,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  Map<String, double> dataMap;
+
   @override
   void initState() {
     super.initState();
@@ -35,9 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _loadData() {
-    Map<String, double> dataMap = {
-      'Flutter' : 5.0,
-      'React' : 3.0,
+   dataMap = {
+      'Flutter': 5.0,
+      'React': 3.0,
       'Xamarin': 2.0,
       'Ionic': 2.0,
     };
@@ -53,7 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
+            PieChart(dataMap: dataMap),
+
+            //slider
+            Slider(
+              value: 200.0,
+              activeColor: Colors.blue,
+              min: 100.0,
+              max: 900.0,
+              divisions: 8,
+              onChanged: (val) => print(val),
+            ),
           ],
         ),
       ),
