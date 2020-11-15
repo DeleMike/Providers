@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jrup/changer.dart';
+import 'package:jrup/screen_two.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
@@ -10,15 +11,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: ChangeNotifierProvider<Changer>(
-        create: (context) => Changer(),
-        child: MyHomePage(title: 'Testing Provider class'),
+    return ChangeNotifierProvider<Changer>(
+      create: (context) => Changer(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyHomePage(title: 'Testing Provider class'),
       ),
     );
   }
@@ -35,17 +36,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, double> dataMap;
-
+   var showChart = false;
 
   @override
   Widget build(BuildContext context) {
-    final changer = Provider.of<Changer>(context);
-    dataMap = {
-      'Flutter': changer.value,
-      'React': 3.0,
-      'Xamarin': 2.0,
-      'Ionic': 2.0,
-    };
+    print('widget rebuild');
+
+    //final changer = Provider.of<Changer>(context, listen: false);
+   
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -54,21 +53,64 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PieChart(
-              dataMap: dataMap,
-              animationDuration: Duration(milliseconds: 800),
+            Consumer<Changer>(
+              builder: (_, changer, __) => Visibility(
+                // maintainSize: true,
+                // maintainAnimation: true,
+                // maintainState: true,
+                visible: changer.isVisible,
+                child: PieChart(
+                  dataMap: {
+                    'Flutter':( changer.value / 90.0),
+                    'React': (changer.value / 100.0),
+                    'Xamarin': 4.6,
+                    'Ionic': 1.9,
+                  },
+                  animationDuration: Duration(milliseconds: 1000),
+                ),
+              ),
             ),
 
             //slider
-            Slider(
-              value: 200.0,
-              activeColor: Colors.blue,
-              min: 100.0,
-              max: 900.0,
-              divisions: 8,
-              onChanged: (val) {
-                changer.increment(val);
-              },
+            Consumer<Changer>(
+              builder: (_, changer, __) => Visibility(
+                visible: changer.isVisible,
+                // maintainSize: true,
+                // maintainAnimation: true,
+                // maintainState: true,
+                child: Slider(
+                  value: changer.value,
+                  activeColor: Colors.blue,
+                  min: 100.0,
+                  max: 900.0,
+                  //divisions: 8,
+                  onChanged: (val) {
+                    changer.increment(val);
+                    print(changer.value);
+                  },
+                ),
+              ),
+            ),
+
+            //button
+            Consumer<Changer>(
+              builder: (_, changer, __ ) =>
+                        ElevatedButton(
+                  child: Text('pie chart'),
+                  onPressed: () {
+
+                    changer.changeVisibility();
+                    print('ShowChart: ${changer.isVisible}');
+                    // setState(() {
+                    //   showChart = !showChart;
+                    //   print('ShowChart: $showChart');
+                    // });
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => ScreenTwo()),
+                    // );
+                  }),
             ),
           ],
         ),

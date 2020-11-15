@@ -1,10 +1,16 @@
 import 'package:flutter/foundation.dart';
 
 class Changer with ChangeNotifier{
-  double value = 5.0;
+  double value = 700.0;
+  bool isVisible = false;
 
   void increment(val) {
-    value += val;
+    value = val ;
+    notifyListeners();
+  }
+
+  void changeVisibility() {
+    isVisible = !isVisible;
     notifyListeners();
   }
 }
