@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 class Changer with ChangeNotifier{
-  double value = 0;
+  double value = 5.0;
 
-  void increment() {
-    value++;
+  void increment(val) {
+    value += val;
     notifyListeners();
   }
 }

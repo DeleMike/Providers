@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider<Changer>(
-        //create: (_),
+        create: (context) => Changer(),
         child: MyHomePage(title: 'Testing Provider class'),
       ),
     );
@@ -36,23 +36,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, double> dataMap;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadData();
-  }
 
-  void _loadData() {
+  @override
+  Widget build(BuildContext context) {
+    final changer = Provider.of<Changer>(context);
     dataMap = {
-      'Flutter': 5.0,
+      'Flutter': changer.value,
       'React': 3.0,
       'Xamarin': 2.0,
       'Ionic': 2.0,
     };
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -73,7 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
               min: 100.0,
               max: 900.0,
               divisions: 8,
-              onChanged: (val) => print(val),
+              onChanged: (val) {
+                changer.increment(val);
+              },
             ),
           ],
         ),
