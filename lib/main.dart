@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jrup/changer.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +16,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Testing Provider class'),
+      home: ChangeNotifierProvider<Changer>(
+        //create: (_),
+        child: MyHomePage(title: 'Testing Provider class'),
+      ),
     );
   }
 }
@@ -29,7 +34,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   Map<String, double> dataMap;
 
   @override
@@ -39,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _loadData() {
-   dataMap = {
+    dataMap = {
       'Flutter': 5.0,
       'React': 3.0,
       'Xamarin': 2.0,
@@ -57,7 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PieChart(dataMap: dataMap),
+            PieChart(
+              dataMap: dataMap,
+              animationDuration: Duration(milliseconds: 800),
+            ),
 
             //slider
             Slider(
