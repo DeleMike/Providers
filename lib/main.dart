@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jrup/changer.dart';
-import 'package:jrup/screen_two.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
