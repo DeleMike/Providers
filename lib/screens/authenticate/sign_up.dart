@@ -199,7 +199,7 @@ class _SignUpState extends State<SignUp> {
                               child: FlatButton(
                                 splashColor: Colors.transparent,
                                 child: Text(
-                                  'Already have an account?',
+                                  'Have an account?',
                                   style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.indigo,
