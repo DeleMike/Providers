@@ -131,35 +131,41 @@ class _SignUpState extends State<SignUp> {
                           ],
                         ),
                         SizedBox(height: 25.0),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: RaisedButton(
-                            child: Text(
-                              'Register',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            color: Colors.indigo,
-                            onPressed: () async {
-                              //register user
-                            },
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                          child: FlatButton(
-                            splashColor: Colors.transparent,
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: RaisedButton(
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 color: Colors.indigo,
+                                onPressed: () async {
+                                  //register user
+                                },
                               ),
                             ),
-                            onPressed: () {
-                              //go to login page
-                              widget.toggleView();
-                            },
-                          ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                              child: FlatButton(
+                                splashColor: Colors.transparent,
+                                child: Text(
+                                  'LOGIN',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  //go to login page
+                                  widget.toggleView();
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
