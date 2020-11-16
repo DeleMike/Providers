@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
       DeviceOrientation.portraitDown,
     ]);
 
+    //used for form fields
     _toggleView() {
       setState(() {
         isObscure = !isObscure;
@@ -48,6 +49,23 @@ class _SignUpState extends State<SignUp> {
             ? icon = Icons.visibility
             : icon = Icons.visibility_off;
       });
+    }
+
+    //display Alert Dialog
+    _showDialog(String title, String message) {
+      showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('okay'),
+            ),
+          ],
+        ),
+      );
     }
 
     return Scaffold(
@@ -162,9 +180,16 @@ class _SignUpState extends State<SignUp> {
                                 onPressed: () async {
                                   //register user
                                   if (_formKey.currentState.validate()) {
+                                    dynamic result = await _authService
+                                        .registerWithEmailAndPassword(
+                                            _emailController.text,
+                                            _passwordController.text);
+
+                                    if (result == null) {
+                                      _showDialog('Message', 'Please try again, something went wrong');
+                                    }
                                     print('email: ${_emailController.text}');
-                                    print(
-                                        'password: ${_passwordController.text}');
+                                    print('password: ${_passwordController.text}');
                                   }
                                 },
                               ),
