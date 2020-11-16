@@ -95,11 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Consumer<Changer>(
               builder: (_, changer, __ ) =>
                         ElevatedButton(
-                  child: Text('pie chart'),
+                  child: Text('${changer.text} pie chart'),
                   onPressed: () {
 
                     changer.changeVisibility();
                     print('ShowChart: ${changer.isVisible}');
+
+                    //this will rebuild the whole the screen
                     // setState(() {
                     //   showChart = !showChart;
                     //   print('ShowChart: $showChart');
