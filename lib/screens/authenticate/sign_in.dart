@@ -19,6 +19,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _authService = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   var brandImage;
 
@@ -49,6 +50,23 @@ class _SignInState extends State<SignIn> {
             ? icon = Icons.visibility
             : icon = Icons.visibility_off;
       });
+    }
+
+    //display Alert Dialog
+    _showDialog(String title, String message) {
+      return showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('okay'),
+            ),
+          ],
+        ),
+      );
     }
 
     return Scaffold(
@@ -92,11 +110,14 @@ class _SignInState extends State<SignIn> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Form(
+                    key: _formKey,
                     child: Column(children: [
                       SizedBox(height: 25.0),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
+                        validator: (val) =>
+                            val.isEmpty ? 'Enter an email' : null,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(16.0),
                           hintText: 'Email',
@@ -115,6 +136,9 @@ class _SignInState extends State<SignIn> {
                           TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             controller: _passwordController,
+                            validator: (val) => val.length < 6
+                                ? 'Enter a password 6+ chars long'
+                                : null,
                             obscureText: isObscure,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(16.0),
@@ -153,6 +177,18 @@ class _SignInState extends State<SignIn> {
                             color: Colors.indigo,
                             onPressed: () async {
                               //login into account
+                              if (_formKey.currentState.validate()) {
+                                dynamic result = await _authService
+                                    .signInWithEmailAndPassword(
+                                        _emailController.text,
+                                        _passwordController.text);
+                                 if (result == null) {
+                                      _showDialog('Message', 'Could not sign in, please check your details and try again.');
+                                  }
+
+                                print('email: ${_emailController.text}');
+                                print('password: ${_passwordController.text}');
+                              }
                             },
                           ),
                           Container(
