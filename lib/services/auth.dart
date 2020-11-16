@@ -19,22 +19,27 @@ class AuthService implements LoginFactory, RegisterFactory {
   }
 
   @override
-  void signInWithEmailAndPassword() {
+  Future signInWithEmailAndPassword() async {
     // TODO: implement signInWithEmailAndPassword
   }
 
   @override
-  void registerWithEmailAndPassword() {
+  Future registerWithEmailAndPassword() async {
     // TODO: implement registerWithEmailAndPassword
   }
 
   @override
-  void signOut() {
-    // TODO: implement signOut
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   @override
-  void forgotPassword() {
+  Future forgotPassword() async {
     // TODO: implement forgotPassword
   }
 }
