@@ -1,6 +1,6 @@
-# jrup
+# Login Signup
 
-A new Flutter project.
+Used for learning authentication
 
 ## Getting Started
 
