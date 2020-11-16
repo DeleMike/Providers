@@ -19,20 +19,29 @@ class AuthService implements LoginFactory, RegisterFactory {
   }
 
   @override
-  Future signInWithEmailAndPassword() async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     // TODO: implement signInWithEmailAndPassword
   }
 
   @override
-  Future registerWithEmailAndPassword() async {
-    // TODO: implement registerWithEmailAndPassword
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      auth.UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      auth.User user = userCredential.user;
+      await user.sendEmailVerification(); //send a verification mail to user
+      return _customUserFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   @override
   Future signOut() async {
     try {
       return await _auth.signOut();
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
