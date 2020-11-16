@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jrup/services/auth.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -7,9 +8,12 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  //field values
   var text = 'show';
   bool isObscure = true;
   var icon = Icons.visibility_off;
+
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,7 @@ class _SignInState extends State<SignIn> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Sign into your account',
+                'Login to your account',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -144,7 +148,7 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             onPressed: () {
-                              //sign up, if account is not created
+                              //go to sign up page
                             },
                           ),
                         ),

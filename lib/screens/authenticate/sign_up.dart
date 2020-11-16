@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jrup/services/auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -7,9 +8,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  //field values
   var text = 'show';
   bool isObscure = true;
   var icon = Icons.visibility_off;
+  
+  final AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     //set device to potrait mode
@@ -64,7 +69,7 @@ class _SignUpState extends State<SignUp> {
             ),
             ),
 
-            //login card
+            //sign up card
             Container(
               margin: EdgeInsets.only(top: 16.0),
               child: Card(
@@ -130,8 +135,25 @@ class _SignUpState extends State<SignUp> {
                         onPressed: () {},
                       ),
                     ),
+
+                  Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                          child: FlatButton(
+                            splashColor: Colors.transparent,
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.indigo,
+                              ),
+                            ),
+                            onPressed: () {
+                              //go to login page
+                            },
+                          ),
+                        ),
                     
-                  ]),
+                  ],),
                 ),
                 elevation: 2.0,
               ),
