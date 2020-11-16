@@ -19,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   final AuthService _authService = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   var brandImage;
 
@@ -90,12 +91,15 @@ class _SignUpState extends State<SignUp> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         SizedBox(height: 25.0),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailController,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter an email' : null,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(16.0),
                             hintText: 'Email',
@@ -113,6 +117,9 @@ class _SignUpState extends State<SignUp> {
                           children: [
                             TextFormField(
                               keyboardType: TextInputType.visiblePassword,
+                              validator: (val) => val.length < 6
+                                  ? 'Enter a password 6+ chars long'
+                                  : null,
                               controller: _passwordController,
                               obscureText: isObscure,
                               decoration: InputDecoration(
@@ -154,6 +161,11 @@ class _SignUpState extends State<SignUp> {
                                 color: Colors.indigo,
                                 onPressed: () async {
                                   //register user
+                                  if (_formKey.currentState.validate()) {
+                                    print('email: ${_emailController.text}');
+                                    print(
+                                        'password: ${_passwordController.text}');
+                                  }
                                 },
                               ),
                             ),
