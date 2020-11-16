@@ -53,7 +53,7 @@ class _SignUpState extends State<SignUp> {
 
     //display Alert Dialog
     _showDialog(String title, String message) {
-      showDialog(
+      return showDialog(
         context: context,
         child: AlertDialog(
           title: Text(title),
