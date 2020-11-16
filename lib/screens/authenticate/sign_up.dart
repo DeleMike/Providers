@@ -20,6 +20,17 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  var brandImage;
+
+  @override
+  void initState() {
+    super.initState();
+    brandImage = Image.asset(
+      'assets/images/google_logo.png',
+      width: 70.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //set device to potrait mode
@@ -55,10 +66,7 @@ class _SignUpState extends State<SignUp> {
                 color: Colors.blue.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(4.0),
               ),
-              child: Image.asset(
-                'assets/images/google_logo.png',
-                width: 70.0,
-              ),
+              child: brandImage,
             ),
 
             SizedBox(height: 25.0),
@@ -87,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(height: 25.0),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(16.0),
                             hintText: 'Email',
@@ -104,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                           children: [
                             TextFormField(
                               keyboardType: TextInputType.visiblePassword,
+                              controller: _passwordController,
                               obscureText: isObscure,
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(16.0),
@@ -152,10 +162,9 @@ class _SignUpState extends State<SignUp> {
                               child: FlatButton(
                                 splashColor: Colors.transparent,
                                 child: Text(
-                                  'LOGIN',
+                                  'Already have an account?',
                                   style: TextStyle(
-                                    decoration: TextDecoration.none,
-                                    
+                                    decoration: TextDecoration.underline,
                                     color: Colors.indigo,
                                   ),
                                 ),
