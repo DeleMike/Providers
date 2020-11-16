@@ -1,6 +1,6 @@
 class LoginFactory{
    ///allows user to sign in into their account
-  Future signInWithEmailAndPassword() async {}
+  Future signInWithEmailAndPassword(String email, String password) async {}
 
   //sign in with Google Provider
 
