@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jrup/models/user.dart';
+import 'package:jrup/screens/authenticate/authenticate.dart';
+import 'package:jrup/screens/home/home.dart';
 import 'package:jrup/screens/wrapper.dart';
 import 'package:jrup/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  //routes
+  static final String authenticatePage = '/authenticatePage';
+  static final String homePage = '/homePage';
+ 
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
@@ -22,7 +28,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Wrapper(),
+        initialRoute: '/',
+        routes: {
+          '/' : (context) => Wrapper(),
+          authenticatePage: (context) => Authenticate(),
+          homePage: (context) => Home(),
+        },
         debugShowCheckedModeBanner: false,
       ),
     );
