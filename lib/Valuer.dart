@@ -1,18 +1,16 @@
 class Valuer {
-  int initialValue = 100;
+  Valuer({this.initialValue});
 
-  ///returns stream<int> values 
+  final int initialValue;
+
+  ///returns stream<int> values
   Stream<int> get value async* {
-    int i = initialValue;
-    while (true) {
-      await Future.delayed(Duration(seconds: 1));
-      yield i += 100;
-      if (i == 900) break;
+    var i = initialValue;
+    while (i < 900) {
+      await Future.delayed(Duration(milliseconds: 700), () {
+        i += 100;
+      });
+      yield i;
     }
-  }
-
-  ///reset initial value
-  void reset() {
-    initialValue = 100;
   }
 }
