@@ -1,3 +1,4 @@
+///list of AuthResultStatus state
 enum AuthResultStatus {
   successful,
   emailAlreadyExists,
