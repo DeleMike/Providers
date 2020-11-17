@@ -28,6 +28,9 @@ class AuthService implements LoginFactory, RegisterFactory {
       auth.UserCredential userCredential = await _auth
           .signInWithEmailAndPassword(email: email, password: password);
       auth.User user = userCredential.user;
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+      }
       return _customUserFromFirebaseUser(user);
     } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
@@ -65,7 +68,13 @@ class AuthService implements LoginFactory, RegisterFactory {
   }
 
   @override
-  Future forgotPassword() async {
-    // TODO: implement forgotPassword
+  Future forgotPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on auth.FirebaseAuthException catch (e) {
+      _status = AuthExceptionHandler.handleException(e);
+      errorMessage = AuthExceptionHandler.generateExceptionMessage(_status);
+      return null;
+    }
   }
 }
