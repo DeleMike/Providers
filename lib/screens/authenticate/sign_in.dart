@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jrup/main.dart';
 import 'package:jrup/services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -225,7 +226,8 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             onPressed: () async {
-                              //functionality for forgot password
+                              //move to forgot password page
+                              Navigator.pushNamed(context, MyApp.forgotPassword);
                             },
                           ),
                         ),
