@@ -70,7 +70,10 @@ class AuthService implements LoginFactory, RegisterFactory {
       await _auth.sendPasswordResetEmail(email: email);
     } on auth.FirebaseAuthException catch (e) {
       _status = AuthExceptionHandler.handleException(e);
-      errorMessage = AuthExceptionHandler.generateExceptionMessage(_status);
+      errorMessage =
+          AuthExceptionHandler.generateExceptionMessage(_status) == ''
+              ? e.code.toString()
+              : AuthExceptionHandler.generateExceptionMessage(_status);
       return null;
     }
   }
