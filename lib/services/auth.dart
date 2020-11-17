@@ -2,10 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:jrup/interfaces/login_factory.dart';
 import 'package:jrup/interfaces/register_factory.dart';
 import 'package:jrup/models/user.dart';
+import 'package:jrup/utils/auth_exception_handler.dart';
+import 'package:jrup/utils/auth_result_status.dart';
 
 class AuthService implements LoginFactory, RegisterFactory {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
   static var errorMessage = '';
+  AuthResultStatus _status;
 
   //create user object based on FirebaseUser
   User _customUserFromFirebaseUser(auth.User newUser) {
@@ -28,7 +31,8 @@ class AuthService implements LoginFactory, RegisterFactory {
       return _customUserFromFirebaseUser(user);
     } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
-      errorMessage = e.code.toString();
+      _status = AuthExceptionHandler.handleException(e);
+      errorMessage = AuthExceptionHandler.generateExceptionMessage(_status);
       return null;
     }
   }
@@ -43,7 +47,8 @@ class AuthService implements LoginFactory, RegisterFactory {
       return _customUserFromFirebaseUser(user);
     } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
-      errorMessage = e.code.toString();
+      _status = AuthExceptionHandler.handleException(e);
+      errorMessage = AuthExceptionHandler.generateExceptionMessage(_status);
       return null;
     }
   }
@@ -53,8 +58,8 @@ class AuthService implements LoginFactory, RegisterFactory {
     try {
       return await _auth.signOut();
     } on auth.FirebaseAuthException catch (e) {
-      print(e.toString());
-      errorMessage = e.code.toString();
+      _status = AuthExceptionHandler.handleException(e);
+      errorMessage = AuthExceptionHandler.generateExceptionMessage(_status);
       return null;
     }
   }
