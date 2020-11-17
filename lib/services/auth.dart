@@ -5,6 +5,7 @@ import 'package:jrup/models/user.dart';
 
 class AuthService implements LoginFactory, RegisterFactory {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+  static var errorMessage = '';
 
   //create user object based on FirebaseUser
   User _customUserFromFirebaseUser(auth.User newUser) {
@@ -27,6 +28,7 @@ class AuthService implements LoginFactory, RegisterFactory {
       return _customUserFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
+      errorMessage = e.toString();
       return null;
     }
   }
@@ -41,6 +43,7 @@ class AuthService implements LoginFactory, RegisterFactory {
       return _customUserFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
+      errorMessage = e.toString();
       return null;
     }
   }
@@ -51,6 +54,7 @@ class AuthService implements LoginFactory, RegisterFactory {
       return await _auth.signOut();
     } catch (e) {
       print(e.toString());
+      errorMessage = e.toString();
       return null;
     }
   }

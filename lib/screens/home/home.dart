@@ -4,11 +4,9 @@ import 'package:jrup/services/auth.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
- 
   final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
-
     final userStatus = Provider.of<User>(context, listen: false);
     bool userIsVerified = userStatus.isVerified;
     print('User is verified: $userIsVerified');
@@ -103,7 +101,7 @@ class Home extends StatelessWidget {
     }
 
     return userIsVerified == true
-        ?  Scaffold(
+        ? Scaffold(
             backgroundColor: Colors.indigo[50],
             appBar: AppBar(
               title: Text('Home Screen'),
@@ -137,8 +135,8 @@ class Home extends StatelessWidget {
                 //         'A content')), //     'Your account has not being verified.\nPlease check your mail and try again')),
               ),
             ),
-          ) : _showDialog('ACCOUNT NOT VERIFIED',
+          )
+        : _showDialog('ACCOUNT NOT VERIFIED',
             'Please check your mail inbox for the message to verify your email registration.');
-  
   }
 }

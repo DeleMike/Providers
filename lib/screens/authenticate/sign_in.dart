@@ -182,8 +182,9 @@ class _SignInState extends State<SignIn> {
                                     .signInWithEmailAndPassword(
                                         _emailController.text,
                                         _passwordController.text);
-                                 if (result == null) {
-                                      _showDialog('Message', 'Could not sign in, please check your details and try again.');
+                                        print('Result = ');   
+                                                                      if (result == null) {
+                                      _showDialog('Could not sign in', AuthService.errorMessage);
                                   }
 
                                 print('email: ${_emailController.text}');

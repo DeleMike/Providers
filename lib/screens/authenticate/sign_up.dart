@@ -186,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                                             _passwordController.text);
 
                                     if (result == null) {
-                                      _showDialog('Message', 'Please try again, something went wrong');
+                                      _showDialog('Could not create new account', 'Because: ${AuthService.errorMessage}');
                                     }
                                     print('email: ${_emailController.text}');
                                     print('password: ${_passwordController.text}');
