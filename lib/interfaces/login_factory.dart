@@ -8,6 +8,6 @@ class LoginFactory{
   Future signOut() async {}
 
   ///allows user to reset password upon forgeting their passoword
-  Future forgotPassword() async{}
+  Future forgotPassword(String email) async{}
 
 }
