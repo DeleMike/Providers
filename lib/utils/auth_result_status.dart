@@ -6,6 +6,7 @@ enum AuthResultStatus {
   invalidEmail,
   userNotFound,
   userDisabled,
+  networkRequestNotFound,
   operationNotAllowed,
   tooManyRequests,
   undefined,
