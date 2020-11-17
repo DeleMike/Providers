@@ -39,9 +39,6 @@ class _SignInState extends State<SignIn> {
       DeviceOrientation.portraitDown,
     ]);
 
-    //print("ChangerVal initial value = ${_changerVal.heightVal}");
-    // final val = Provider.of<Changer>(context);
-
     _toggleView() {
       setState(() {
         isObscure = !isObscure;
@@ -62,7 +59,7 @@ class _SignInState extends State<SignIn> {
           actions: [
             FlatButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('okay'),
+              child: Text('OKAY'),
             ),
           ],
         ),

@@ -26,9 +26,9 @@ class AuthService implements LoginFactory, RegisterFactory {
           .signInWithEmailAndPassword(email: email, password: password);
       auth.User user = userCredential.user;
       return _customUserFromFirebaseUser(user);
-    } catch (e) {
+    } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
-      errorMessage = e.toString();
+      errorMessage = e.code.toString();
       return null;
     }
   }
@@ -41,9 +41,9 @@ class AuthService implements LoginFactory, RegisterFactory {
       auth.User user = userCredential.user;
       await user.sendEmailVerification(); //send a verification mail to user
       return _customUserFromFirebaseUser(user);
-    } catch (e) {
+    } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
-      errorMessage = e.toString();
+      errorMessage = e.code.toString();
       return null;
     }
   }
@@ -52,9 +52,9 @@ class AuthService implements LoginFactory, RegisterFactory {
   Future signOut() async {
     try {
       return await _auth.signOut();
-    } catch (e) {
+    } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
-      errorMessage = e.toString();
+      errorMessage = e.code.toString();
       return null;
     }
   }
