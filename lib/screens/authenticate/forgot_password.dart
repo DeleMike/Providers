@@ -101,7 +101,7 @@ class ForgotPassword extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: RaisedButton(
                             child: Text(
-                              'Register',
+                              'Submit',
                               style: TextStyle(color: Colors.white),
                             ),
                             color: Colors.indigo,
