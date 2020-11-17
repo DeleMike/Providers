@@ -28,9 +28,6 @@ class AuthService implements LoginFactory, RegisterFactory {
       auth.UserCredential userCredential = await _auth
           .signInWithEmailAndPassword(email: email, password: password);
       auth.User user = userCredential.user;
-      if (!user.emailVerified) {
-        await user.sendEmailVerification();
-      }
       return _customUserFromFirebaseUser(user);
     } on auth.FirebaseAuthException catch (e) {
       print(e.toString());
