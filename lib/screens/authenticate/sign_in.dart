@@ -178,14 +178,18 @@ class _SignInState extends State<SignIn> {
                                 dynamic result = await _authService
                                     .signInWithEmailAndPassword(
                                         _emailController.text.toString().trim(),
-                                        _passwordController.text.toString().trim());
+                                        _passwordController.text
+                                            .toString()
+                                            .trim());
                                 if (result == null) {
                                   _showDialog('Could not sign in',
                                       AuthService.errorMessage);
                                 }
 
-                                print('email: ${_emailController.text.toString().trim()}');
-                                print('password: ${_passwordController.text.toString().trim()}');
+                                print(
+                                    'email: ${_emailController.text.toString().trim()}');
+                                print(
+                                    'password: ${_passwordController.text.toString().trim()}');
                               }
                             },
                           ),

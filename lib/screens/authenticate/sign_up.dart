@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
           actions: [
             FlatButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('okay'),
+              child: Text('OKAY'),
             ),
           ],
         ),
@@ -182,14 +182,22 @@ class _SignUpState extends State<SignUp> {
                                   if (_formKey.currentState.validate()) {
                                     dynamic result = await _authService
                                         .registerWithEmailAndPassword(
-                                            _emailController.text,
-                                            _passwordController.text);
+                                            _emailController.text
+                                                .toString()
+                                                .trim(),
+                                            _passwordController.text
+                                                .toString()
+                                                .trim());
 
                                     if (result == null) {
-                                      _showDialog('Could not create new account', 'Because: ${AuthService.errorMessage}');
+                                      _showDialog(
+                                          'Could not create new account',
+                                          AuthService.errorMessage);
                                     }
-                                    print('email: ${_emailController.text}');
-                                    print('password: ${_passwordController.text}');
+                                    print(
+                                        'email: ${_emailController.text.toString().trim()}');
+                                    print(
+                                        'password: ${_passwordController.text.toString().trim()}');
                                   }
                                 },
                               ),
