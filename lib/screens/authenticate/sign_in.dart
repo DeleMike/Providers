@@ -22,16 +22,10 @@ class _SignInState extends State<SignIn> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  var brandImage;
-
-  @override
-  void initState() {
-    super.initState();
-    brandImage = Image.asset(
+  var brandImage = Image.asset(
       'assets/images/google_logo.png',
       width: 70.0,
     );
-  }
 
   @override
   Widget build(BuildContext context) {
