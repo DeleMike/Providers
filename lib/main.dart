@@ -28,6 +28,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(primary: Colors.indigo),
+          ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: '/',
