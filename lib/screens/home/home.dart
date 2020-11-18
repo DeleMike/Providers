@@ -127,12 +127,53 @@ class Home extends StatelessWidget {
             ),
             body: Center(
               child: Container(
-                child: Text('Home Screen'),
-                // child: userIsVerified == true
-                //     ? Text('Home Screen True')
-                //     //: //_showMe(),
-                //     : _showDialog('A title',
-                //         'A content')), //     'Your account has not being verified.\nPlease check your mail and try again')),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(8.0),
+                      width: 250.0,
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                          primary: Colors.indigo[900],
+                          side:
+                              BorderSide(color: Colors.indigo[300], width: 2.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(24.0),
+                          child: Text(
+                            'CREATE A ROOM',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(8.0),
+                      width: 250.0,
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                          primary: Colors.indigo[900],
+                          side:
+                              BorderSide(color: Colors.indigo[300], width: 2.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Text(
+                            'JOIN A ROOM',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )
