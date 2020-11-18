@@ -152,6 +152,7 @@ class _SignInState extends State<SignIn> {
                           ),
                           Positioned(
                             right: 1,
+                            top:1,
                             child: FlatButton.icon(
                               splashColor: Colors.transparent,
                               onPressed: () {

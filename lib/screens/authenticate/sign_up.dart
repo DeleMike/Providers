@@ -154,6 +154,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Positioned(
                               right: 1,
+                              top:1,
                               child: FlatButton.icon(
                                 splashColor: Colors.transparent,
                                 onPressed: () {
