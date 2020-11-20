@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jrup/models/user.dart';
 import 'package:jrup/screens/home/create_room_form.dart';
+import 'package:jrup/screens/home/room.dart';
 import 'package:jrup/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -110,11 +111,14 @@ class Home extends StatelessWidget {
       );
     }
 
-    _showCreateRoomDialog(String title) {
+    _showCreateRoomDialog(String title, bool isATeacher) {
       return showDialog(
         context: context,
         child: AlertDialog(
-          content: CreateRoomForm(title: title),
+          content: CreateRoomForm(
+            title: title,
+            isTeacher: isATeacher,
+          ),
         ),
       );
     }
@@ -138,10 +142,15 @@ class Home extends StatelessWidget {
                       );
                     }
                   },
-                  icon: Icon(Icons.person, color: Colors.white,),
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
                   label: Text(
                     'logout',
-                    style: TextStyle(color: Colors.white,),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
@@ -156,7 +165,14 @@ class Home extends StatelessWidget {
                       width: 250.0,
                       child: OutlinedButton(
                         onPressed: () async {
-                          _showCreateRoomDialog('Create a new room');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Room(
+                                isTeacher: true,
+                              ),
+                            ),
+                          );
                         },
                         style: OutlinedButton.styleFrom(
                           primary: Colors.indigo[900],
@@ -178,8 +194,8 @@ class Home extends StatelessWidget {
                       margin: EdgeInsets.all(8.0),
                       width: 250.0,
                       child: OutlinedButton(
-                        onPressed: () async{
-                          _showCreateRoomDialog('Join existing room') ;
+                        onPressed: () async {
+                          // _showCreateRoomDialog('Join existing room', false) ;
                         },
                         style: OutlinedButton.styleFrom(
                           primary: Colors.indigo[900],
